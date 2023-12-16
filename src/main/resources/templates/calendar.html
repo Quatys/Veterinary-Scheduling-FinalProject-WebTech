@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Booking Calendar</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .available {
+            background-color: #b3ffb3;
+        }
+
+        .booked {
+            background-color: #ff6666;
+        }
+    </style>
+</head>
+<body>
+<h1>Calendar</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="time : ${times}">
+        <td th:text="${time}"></td>
+        <td th:each="day : ${days}" th:id="${day + time}" th:class="${getBookingStatus(day + time)}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Add more content using Thymeleaf -->
+</body>
+</html>

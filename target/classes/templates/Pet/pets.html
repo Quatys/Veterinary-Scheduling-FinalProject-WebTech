@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #17202A;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #f2f9ff;
+        }
+
+        .btn {
+            margin-right: 5px;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+<main class="container">
+    <h1>Pet List</h1>
+
+    <table class="table table-striped">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Pet ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Age</th>
+            <th scope="col">Medical History</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pet : ${allPets}">
+            <td th:text="${pet.id}"></td>
+            <td th:text="${pet.name}"></td>
+            <td th:text="${pet.breed}"></td>
+            <td th:text="${pet.age}"></td>
+            <td th:text="${pet.medicalHistory}"></td>
+            <td>
+                <a class="btn btn-warning" th:href="@{/pet/{petId}/edit_pet(petId=${pet.id})}">Edit</a>
+                <a class="btn btn-danger" th:href="@{/pet/{petId}/delete_pet(petId=${pet.id})}" onclick="return confirmDelete()">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Pet?");
+    }
+</script>
+</body>
+
+</html>

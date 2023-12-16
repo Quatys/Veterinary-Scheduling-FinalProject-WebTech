@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Appointment List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #45B39D;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a, button {
+            display: inline-block;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        a:hover {
+            background-color: #ffcc00; /* Yellow for Edit button */
+        }
+
+        button:hover {
+            background-color: #e74c3c; /* Red for Delete button */
+        }
+    </style>
+</head>
+<body>
+<h2>Appointment List</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Pet Name</th>
+        <th>Owner's Name</th>
+        <th>Appointment Date</th>
+        <th>Appointment Time</th>
+        <th>Vet</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.petName}"></td>
+        <td th:text="${appointment.ownerName}"></td>
+        <td th:text="${appointment.appointmentDate}"></td>
+        <td th:text="${appointment.appointmentTime}"></td>
+        <td th:text="${appointment.vetSelection}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${appointment.id})}">Edit</a>
+            <a th:href="@{/delete/{id}(id=${appointment.id})}">Delete</a>
+            <button th:if="${not appointment.approved}" onclick="approveAppointment(${appointment.id})">Approve</button>
+            <button th:if="${not appointment.rejected}" onclick="rejectAppointment(${appointment.id})">Reject</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function approveAppointment(appointmentId) {
+        // Add logic to send an approval request to the server
+        console.log('Appointment Approved:', appointmentId);
+    }
+
+    function rejectAppointment(appointmentId) {
+        // Add logic to send a rejection request to the server
+        console.log('Appointment Rejected:', appointmentId);
+    }
+</script>
+
+</body>
+</html>

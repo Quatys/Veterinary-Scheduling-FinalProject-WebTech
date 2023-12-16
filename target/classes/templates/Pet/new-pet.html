@@ -1,0 +1,105 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f8f8f8;
+        padding: 20px;
+        color: #333;
+    }
+
+    h1 {
+        color: #45B39D;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    form {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+
+    label {
+        display: block;
+        margin-top: 20px;
+        letter-spacing: 1px;
+    }
+
+    input[type='text'],
+    input[type='number'],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box; /* This makes sure that padding does not affect the overall width of the inputs */
+    }
+
+    input[type='submit'] {
+        width: 100%;
+        background: #45B39D;
+        color: white;
+        padding: 10px;
+        margin-top: 30px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    input[type='submit']:hover {
+        background: #45B39D;
+    }
+
+    textarea {
+        resize: vertical; /* Allows the user to vertically resize the textarea (no horizontal resize) */
+    }
+
+    input,
+    textarea {
+        outline: none;
+    }
+
+    input:required,
+    textarea:required {
+        box-shadow: none;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #5D5C61;
+    }
+
+    br {
+        display: none;
+    }
+</style>
+<body>
+<main class="container">
+    <h1>Add a Pet</h1>
+
+    <form th:action="@{/Pet/pets}" method="post">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:required="true"><br>
+
+        <label for="breed">Breed:</label>
+        <input type="text" id="breed" name="breed" th:required="true"><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" th:required="true"><br>
+
+        <label for="medicalHistory">Medical History:</label>
+        <textarea id="medicalHistory" name="medicalHistory" rows="4" cols="50" th:required="true"></textarea><br>
+
+        <input type="submit" value="Add Pet">
+    </form>
+
+</main>
+</body>
+</html>
